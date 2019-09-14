@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NHibernateTest.DomainClasses;
 
 namespace NHibernateTest
 {
@@ -20,7 +21,8 @@ namespace NHibernateTest
                     };
                     session.Save(kazemi);
                     transaction.Commit();
-                    Console.WriteLine("Kazemi Created: " + kazemi.Name);
+                    Console.WriteLine("Kazemi Created: " + kazemi.Name + "\t" +
+                                      kazemi.Id);
                 }
 
                 Console.ReadKey();

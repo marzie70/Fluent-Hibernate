@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NHibernateTest
+namespace NHibernateTest.DomainClasses
 {
-    public class Kazemi
+    class Kazemi
     {
         public virtual int Id { get; set; }
         public virtual string Name { get; set; }

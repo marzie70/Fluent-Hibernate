@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FluentNHibernate.Automapping;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
 using NHibernate.Type;
+using NHibernateTest.DomainClasses;
 
 namespace NHibernateTest
 {
@@ -25,20 +27,27 @@ namespace NHibernateTest
         }
         private static void InitializeSessionFactory()
         {
+            var cfg = new StoreConfiguration();
             _sessionFactory = Fluently.Configure()
-
-
-
                 .Database(MsSqlConfiguration.MsSql2008
                     .ConnectionString(@"Data Source=.;Initial Catalog=Employee;User ID=sa;Password=sa123")
                     .ShowSql()
                     )
-                .Mappings(m =>
-                    m.FluentMappings
-                    .AddFromAssemblyOf<Kazemi>())
-                .ExposeConfiguration(cfg => new SchemaExport(cfg)
+                ////.Mappings(m =>
+                ////    m.FluentMappings
+                ////    .AddFromAssemblyOf<Kazemi>(type => type.Namespace.EndsWith("Entities")))
+                ////.ExposeConfiguration(cfg => new SchemaExport(cfg)
+                ////    .Create(true, true))
+                ////.BuildSessionFactory();
+                // new
+            .Mappings(m =>
+                    m.AutoMappings
+                        .Add(
+                        // your automapping setup here
+                        AutoMap.AssemblyOf<Kazemi>(cfg)))
+                .ExposeConfiguration(cfgg => new SchemaExport(cfgg)
                     .Create(true, true))
-                .BuildSessionFactory();
+            .BuildSessionFactory();
         }
 
         public static ISession OpenSession()

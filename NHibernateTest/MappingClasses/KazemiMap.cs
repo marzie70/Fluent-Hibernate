@@ -5,16 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using FluentNHibernate.Automapping;
 using FluentNHibernate.Automapping.Alterations;
-using NHibernate.Mapping;
+using NHibernateTest.DomainClasses;
 
-namespace NHibernateTest
+namespace NHibernateTest.MappingClasses
 {
-    public class KazemiMap : IAutoMappingOverride<Kazemi>
+    class KazemiMap : IAutoMappingOverride<Kazemi>
     {
         public void Override(AutoMapping<Kazemi> mapping)
         {
-            mapping.Id(c => c.Id);
-            mapping.Map(c => c.Name);
+            mapping.Id(m => m.Id);
+            mapping.Map(m => m.Name);
 
         }
     }
